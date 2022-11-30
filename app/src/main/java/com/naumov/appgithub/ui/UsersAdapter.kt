@@ -1,3 +1,6 @@
+package com.naumov.appgithub.ui
+
+import com.naumov.appgithub.UserEntity
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
@@ -12,7 +15,8 @@ class UsersAdapter : RecyclerView.Adapter<UserViewHolder>() {
     override fun getItemId(position: Int): Long = getItem(position).id
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder = UserViewHolder(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder =
+        UserViewHolder(parent)
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bind(getItem(position))

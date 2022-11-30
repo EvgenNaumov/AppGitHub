@@ -1,10 +1,11 @@
+package com.naumov.appgithub.ui
+
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.naumov.appgithub.R
+import com.naumov.appgithub.UserEntity
 import com.naumov.appgithub.databinding.ItemFragmentBinding
 
 class UserViewHolder(parent: ViewGroup):RecyclerView.ViewHolder(

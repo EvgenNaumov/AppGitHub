@@ -1,10 +1,9 @@
 package com.naumov.appgithub
 
-import UserEntity
 import android.os.Looper
 import android.os.Handler
 
-private const val DATA_LOADING_FAKE_DELAY = 1_000L
+private const val DATA_LOADING_FAKE_DELAY = 3_000L
 
 class FakeUserRepoImpl : UsersRepo {
 
