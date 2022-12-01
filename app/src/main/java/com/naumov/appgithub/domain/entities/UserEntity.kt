@@ -1,4 +1,4 @@
-package com.naumov.appgithub
+package com.naumov.appgithub.domain.entities
 
 data class UserEntity(
     val login:String,

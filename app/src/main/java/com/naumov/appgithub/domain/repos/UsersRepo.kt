@@ -1,4 +1,6 @@
-package com.naumov.appgithub
+package com.naumov.appgithub.domain.repos
+
+import com.naumov.appgithub.domain.entities.UserEntity
 
 interface UsersRepo {
     fun getUsers(

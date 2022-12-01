@@ -1,6 +1,6 @@
-package com.naumov.appgithub.ui
+package com.naumov.appgithub.ui.users
 
-import com.naumov.appgithub.UserEntity
+import com.naumov.appgithub.domain.entities.UserEntity
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 

@@ -1,7 +1,9 @@
-package com.naumov.appgithub
+package com.naumov.appgithub.data
 
 import android.os.Looper
 import android.os.Handler
+import com.naumov.appgithub.domain.entities.UserEntity
+import com.naumov.appgithub.domain.repos.UsersRepo
 
 private const val DATA_LOADING_FAKE_DELAY = 3_000L
 

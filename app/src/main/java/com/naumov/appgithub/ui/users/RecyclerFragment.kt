@@ -1,6 +1,5 @@
-package com.naumov.appgithub.ui
+package com.naumov.appgithub.ui.users
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.naumov.appgithub.*
 import com.naumov.appgithub.databinding.RecyclerFragmentBinding
+import com.naumov.appgithub.domain.entities.UserEntity
+import com.naumov.appgithub.domain.repos.UsersRepo
 
-class RecyclerFragment : Fragment() {
+class RecyclerFragment : Fragment(), UsersContract.View {
 
     private var _binding: RecyclerFragmentBinding? = null
     private val binding get() = _binding!!
-    private val userRepo: UsersRepo by lazy { requireContext().app.userRepo }
 
     private val adapter: UsersAdapter = UsersAdapter()
+    private lateinit var presenter:UsersContract.Presenter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,35 +33,18 @@ class RecyclerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-
-        initRecycleeView()
+        presenter = UsersPresenter(app.userRepo)
+        presenter.attach(this)
     }
 
     private fun initView() {
-        showProgress(false)
 
         binding.recyclerButton.setOnClickListener {
-            loadData()
+            presenter.onRefresh()
         }
-    }
+        initRecycleeView()
+        showProgress(false)
 
-    private fun loadData() {
-        showProgress(true)
-        userRepo.getUsers(
-
-            onSuccess = {
-                showProgress(false)
-                onDataLoaded(it)
-            },
-            onError = {
-                showProgress(false)
-                onError(it)
-            }
-        )
-    }
-
-    private fun onDataLoaded(it: List<UserEntity>) {
-        adapter.setData(it)
     }
 
     private fun initRecycleeView() {
@@ -69,16 +53,21 @@ class RecyclerFragment : Fragment() {
 
     }
 
-    private fun showProgress(isProcess: Boolean) {
+    override fun showUsers(it: List<UserEntity>) {
+        adapter.setData(it)
+    }
+
+    override fun showProgress(isProcess: Boolean) {
         binding.progressBar.isVisible = isProcess
         binding.usersRecyclerView.isVisible = !isProcess
     }
 
-    private fun onError(throwable: Throwable){
+    override fun showError(throwable: Throwable){
         Toast.makeText(this.context, throwable.message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {
+        presenter.detach()
         super.onDestroy()
         _binding = null
     }
